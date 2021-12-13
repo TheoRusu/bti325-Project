@@ -259,10 +259,10 @@ app.get('/department/:departmentId', (req, res) => {
 		.getDepartmentById(req.params.departmentId)
 		.then(function(data) {
 			// res.json(data);
-			if (data.length > 0) {
-				res.render('department', { department: data });
-			} else {
+			if (!data) {
 				res.status(404).send('Department Not Found');
+			} else {
+                res.render('department', { department: data });
 			}
 		})
 		.catch(function(err) {
